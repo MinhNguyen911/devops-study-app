@@ -3,6 +3,8 @@ python = "3.13"
 neovim = "latest"
 uv = "latest"
 pre-commit = "latest"
+trivy = "latest"
+ruff = "latest"
 
 [settings]
 python.uv_venv_auto = true
