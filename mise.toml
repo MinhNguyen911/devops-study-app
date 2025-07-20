@@ -5,6 +5,7 @@ uv = "latest"
 pre-commit = "latest"
 trivy = "latest"
 ruff = "latest"
+rg = "latest"
 
 [settings]
 python.uv_venv_auto = true
