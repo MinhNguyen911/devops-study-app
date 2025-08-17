@@ -1,13 +1,11 @@
 name: Build and Push Docker Images
-
 on:
   push:
-    tags: "backend*"
-
+    tags:
+      - "backend*"
 env:
   REGISTRY: ghcr.io
-  BACKEND_IMAGE_NAME: ${{ env.OWNER_LC }}/study-app-api
-
+  BACKEND_IMAGE_NAME: ${{ github.repository_owner }}/study-app-api
 jobs:
   build-and-push-backend:
     name: Build and Push Backend
@@ -20,28 +18,28 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Log in to the Container registry
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Set lower case owner name
+
+      - name: Extract tag name and prepare image name
+        id: meta
         run: |
-          echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
-        env:
-          OWNER: ${{ github.repository_owner }}
-      - name: Extract tag name
-        id: tag
-        run: echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          echo "IMAGE_NAME=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')/study-app-api" >> $GITHUB_OUTPUT
+
       - name: Build and push Backend Docker image
         uses: docker/build-push-action@v5
         with:
           context: ./src/backend
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.BACKEND_IMAGE_NAME }}:${{ steps.tag.outputs.TAG }}
-            ${{ env.REGISTRY }}/${{ env.BACKEND_IMAGE_NAME }}:latest
-        outputs:
-          tag: ${{ steps.tag.outputs.TAG }}
-    app: backend
+            ${{ env.REGISTRY }}/${{ steps.meta.outputs.IMAGE_NAME }}:${{ steps.meta.outputs.TAG }}
+            ${{ env.REGISTRY }}/${{ steps.meta.outputs.IMAGE_NAME }}:latest
+    outputs:
+      tag: ${{ steps.meta.outputs.TAG }}
+      app: backend
