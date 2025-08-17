@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/MinhNguyen911/devops-study-app/compare/backend-v0.2.2...backend-v0.2.3) (2025-08-17)
+
+
+### Bug Fixes
+
+* **backend:** fix not lowercase repo owner name again ([#17](https://github.com/MinhNguyen911/devops-study-app/issues/17)) ([3c1382b](https://github.com/MinhNguyen911/devops-study-app/commit/3c1382bcb8d79be20eaec7ad4dd18a260a3f284b))
+
 ## [0.2.2](https://github.com/MinhNguyen911/devops-study-app/compare/backend-v0.2.1...backend-v0.2.2) (2025-08-17)
 
 
