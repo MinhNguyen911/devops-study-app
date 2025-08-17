@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/MinhNguyen911/devops-study-app/compare/backend-v0.1.0...backend-v0.2.0) (2025-08-17)
+
+
+### Features
+
+* **backend:** add container image building and pushing ([#10](https://github.com/MinhNguyen911/devops-study-app/issues/10)) ([f826a91](https://github.com/MinhNguyen911/devops-study-app/commit/f826a91c5490d3159960e15fc027b1dbef0800cb))
+
 ## 0.1.0 (2025-07-29)
 
 
